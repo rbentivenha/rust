@@ -1,26 +1,20 @@
-use std::io;
-
 fn main () {
-    println!("Please the nth element of fibonnaci");
 
-    let mut guess = String::new();
-    let mut n1 = 0;
-    let mut n2 = 1;
-    let mut count = 1;
+    let str_literal = "This is an string slice";
 
-    io::stdin().read_line(&mut guess).expect("Failed to read line");
-    let guess : u32 = guess.trim().parse()
-        .expect("Type a number, please");
+    let word = return_word(str_literal);
 
-    loop {
-        if count == guess {
-            break;
+    println!("Word: {}", word);
+}
+
+fn return_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
         }
-        let actual = n1 + n2;
-        n1 = n2;
-        n2 = actual;
-        count = count + 1;
     }
 
-    println!("Nth: {}", n2);
+    &s[..]
 }
